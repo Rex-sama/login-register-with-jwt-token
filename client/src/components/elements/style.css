@@ -1,0 +1,111 @@
+/* Login */
+body{
+background-color: rgb(113, 211, 211);
+}
+.container1{
+    background-color: white;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+    width: 400px;
+    margin-top: 100px;
+    text-align: center;
+    height: 400px;
+}
+.container1 h2{
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.form-data label{
+    font-size: 16px;
+    margin-left: -185px;
+}
+.form-data .l2{
+    margin-left: -220px;
+}
+
+.form-data input {
+    width: 300px;
+    height: 40px;
+}
+.form-data input[type="submit"]{
+    font-size: 18px;
+}
+
+/* Register */
+
+.container2{
+    background-color: white;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+    width: 400px;
+    margin-top: 40px;
+    text-align: center;
+    height: 558px;
+}
+.container2 h2{
+    font-weight: 700; 
+}
+
+.form-data .l3{
+    margin-left: -160px;
+}
+
+.error {
+    text-align: center;
+    background-color: rgb(229, 151, 151);
+    border:1px solid red;
+    border-radius: 5px;
+    color: rgb(151, 14, 14);    
+    font-size: 15px;
+    font-weight: 500;
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px;
+}
+
+/* Private  */
+.msg{
+    margin-left: auto;
+    margin-right: auto;
+    width: 420px;
+    font-size: 21px;
+    margin-top:100px;
+    height: 40px;
+    font-weight: 100;
+}
+p .logout{
+width: 100px;
+height: 37px;
+padding: 5px;
+background-color: #4CAF50;
+margin-left: 129px;
+color: rgb(241, 240, 241);
+border: none;
+font-size: 18px;
+font-weight: 100;
+}
+p .logout:hover{
+    background-color: #3e8e41;
+    color:white ;
+}
+
+.success-msg{
+    margin-left: auto;
+    margin-right: auto;
+    width: 420px;
+    background-color: rgb(106, 236, 139);
+    border : 2px solid green;
+    border-radius: 15px;
+    height: 100px;
+    text-align: center;
+    padding: 38px;
+    font-size: 21px;
+}
+
