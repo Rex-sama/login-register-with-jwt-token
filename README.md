@@ -33,11 +33,14 @@ npm start
 ```
 ## Build With
 
-- React Js
-- React Router
-- Node.js
-- Express
-- Mongoose
+Frontend
+- <a href="https://reactjs.org/">React Js</a>
+- <a href="https://reactrouter.com/">React Router</a>
+
+Backend
+- <a href="https://nodejs.org/en/">Node.js</a>
+- <a href="https://expressjs.com/">Express.js</a>
+- <a href="https://mongoosejs.com/">Mongoose</a>
 
 ## Contributing
 
