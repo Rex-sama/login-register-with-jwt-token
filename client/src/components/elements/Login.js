@@ -48,9 +48,11 @@ export default function Login({history}) {
             <label>Email Address</label><br />
                 <input type="email" placeholder="Enter Email" value={email} onChange={e=>setEmail(e.target.value)} /><br/><br/>
             <label className="l2">Password</label><br />
-                <input type="password" placeholder="Enter Password" value={password} onChange={e=>setPassword(e.target.value)} /> <br/><br/>
+                <input type="password" placeholder="Enter Password" value={password} onChange={e=>setPassword(e.target.value)} /> <br />
+                <p className="forgot"><Link to='/forgotpassword' className='f1'>Forgot Password?</Link></p>
+                
             <input type="submit" value='Submit' className="btn btn-primary"/><br/><br />
-            <span>Not Registred ? <Link to='/register'>Sign Up</Link> </span>
+            <span>Not Registred ? <Link to='/register' className='f1'>Sign Up</Link> </span>
             </form>
             </div>
         </div>

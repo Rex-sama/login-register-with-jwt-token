@@ -10,13 +10,17 @@ const sendEmail = (options) => {
     })
 
     const mailoption = {
-        from : process.env.EMAIL_FROM,
+        from : {
+            name: 'Password Reset',
+            address: process.env.EMAIL_FROM
+        } ,
         to : options.to,
         subject : options.success,
-        html : options.text
+        html : options.text,
+        
     }
 
-    transporter.sendMail(mailOptions,function(err,info){
+    transporter.sendMail(mailoption,function(err,info){
         if(err){
             console.log(err)
         }else{

@@ -1,5 +1,7 @@
 const User = require('../models/Posts')
 const jwt = require('jsonwebtoken')
+const sendEmail = require('../utils/sendEmail')
+const crypto = require('crypto')
 
 exports.register = async(req,res,next) => {
     const {username,email,password}= req.body
@@ -57,27 +59,70 @@ exports.forgotpassword = async(req,res,next) => {
 
     try {
         const user = await User.findOne({email})
-        if(!user){
-            res.status(404).json('Email could not be sent')
-        }
-        const resetToken = user.resetPasswordToken();
-        await user.save
+       
+        const resetToken = await user.resetPasswordToken();
+        await user.save()
 
-        const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+        const resetUrl = `http://localhost:3000/resetpassword/${resetToken}`;
 
         const message = `
-        <h1>You have requested a password reset</h1>
-        <p>Please go to this link to reset your password</p>
-        <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+        <body style="background-color:rgb(247, 245, 245);height:250px;padding-top:10px;">
+        <div style="border:1px solid rgb(223, 215, 219); height:220px;width:520px;margin-left:auto;margin-right:auto;background-color:white;margin-top:10px;">
+        <h1 style=" text-align: center;">Hello ${user.email},</h1>
+        <h2 style=" text-align: center;">You have requested a password reset</h2>
+        <p style=" text-align: center;">Please click on the link to reset your password</p>
+        <div style=" text-align: center;" >
+        <button style=" background-color:rgb(51, 53, 182);border:none;width:200px;height:40px;text-align: center;">
+        <a href=${resetUrl} clicktracking=off style="text-decoration:none;color:white; font-size: 18px;text-align: center;">Reset Password</a>
+        </button>   
+        </div>
+        </div>
+        </body>
         `;
+        try {
+            await sendEmail({
+                to:user.email,
+                subject: 'Password Reset',
+                text:message
 
+            });
+            res.status(200).json({success:true,data:"Email Sent! Check your mailbox"})
+        } catch (error) {
+            user.resetToken =undefined
+            user.resetExpire =undefined
+
+            await user.save()
+            res.status(500).json(error)
+        }
        
 
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json("Please Enter your registered email")
     }
+
 } 
 
-exports.resetpassword = (req,res,next) => {
-    res.send('Reset Password')
+exports.resetpassword = async (req,res,next) => {
+    const resetPasswordToken =  crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+
+    try {
+        const user = await User.findOne({
+           resetToken: resetPasswordToken,
+           resetExpire: {$gt : Date.now()}
+
+        })
+
+    if(!user){
+        res.status(400).json("Password cannot Reset.Try Again")
+    }   else{
+    user.password = req.body.password;
+    user.resetToken = undefined;
+    user.resetExpire = undefined;
+    await user.save();
+
+    res.status(201).json("Password Successfully Reset")
+    }
+    } catch (error) {
+        res.status(400).json(error)
+    }
 } 

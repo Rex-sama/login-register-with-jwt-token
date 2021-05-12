@@ -5,7 +5,7 @@ const { register , login , forgotpassword , resetpassword } = require('../contro
 router.route('/register').post(register)
 router.route('/login').post(login)
 router.route('/forgotpassword').post(forgotpassword)
-router.route('/resetpassword').post(resetpassword)
+router.route('/resetpassword/:resetToken').put(resetpassword)
 
 //Private Route
 const {privateData} = require('../controllers/privateRoute')

@@ -7,6 +7,8 @@ import PrivateRoute from './components/routes/PrivateRoute'
 import Private from './components/elements/Private'
 import Register from './components/elements/Register'
 import Login from './components/elements/Login'
+import ForgotPassword from './components/elements/ForgotPassword'
+import ResetPassword from './components/elements/ResetPassword'
 
 
 function App() {
@@ -17,7 +19,8 @@ function App() {
         <PrivateRoute exact path="/" component={Private}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={Register}/>
-  
+        <Route exact path='/forgotpassword' component={ForgotPassword}/>
+        <Route exact path='/resetpassword/:resetToken' component={ResetPassword}/>
       </Switch>
    
     </div>
