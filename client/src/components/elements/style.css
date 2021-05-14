@@ -13,9 +13,9 @@ body{
     margin-right: auto;
     padding-top: 15px;
     width: 400px;
-    margin-top: 100px;
+    margin-top: 60px;
     text-align: center;
-    height: 400px;
+    height: 500px;
 }
 .container1 h2{
     font-weight: 700;
@@ -36,7 +36,8 @@ body{
 .form-data input[type="submit"]{
     font-size: 18px;
     background-color:#440044;
-    border:none
+    border:none;
+    border-radius: unset;
 }
 
  .forgot {
@@ -50,6 +51,38 @@ body{
     text-align: justify;
     width: 300px;
 }
+.hr1{
+    border-top: 1px solid rgb(180, 175, 175);
+    width: 35%;
+    text-align: left;
+    margin-left:40px;
+    margin-top: 25px;
+}
+.hr2{
+    border-top: 1px solid rgb(180, 175, 175);
+    width: 35%;
+    text-align: right;
+    margin-right:40px;
+    margin-top: -20px;
+}
+.ortext{
+    /* background-color: aqua; */
+    margin-top: -30px;
+    color: rgb(90, 85, 85);
+}
+
+.googlebutton{
+    width: 300px;
+    text-align: center;
+    height: 42px;
+    border:1px solid gray;
+    border-radius: unset;
+}
+
+.googlebutton img {
+    margin-right: 7px;
+}
+
 
 /* Register */
 
@@ -103,6 +136,7 @@ body{
     margin-right: auto;
     margin-top: -20px;
 }
+
 
 /* Private  */
 .msg{

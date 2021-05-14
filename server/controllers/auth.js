@@ -2,6 +2,8 @@ const User = require('../models/Posts')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
+const {OAuth2Client} = require('google-auth-library')
+const client = new OAuth2Client("1093241151358-1pgh4gf6et6t5f3gfg6vlt0cv7onf8jr.apps.googleusercontent.com")
 
 exports.register = async(req,res,next) => {
     const {username,email,password}= req.body
@@ -67,7 +69,7 @@ exports.forgotpassword = async(req,res,next) => {
 
         const message = `
         <body style="background-color:rgb(247, 245, 245);height:250px;padding-top:10px;">
-        <div style="border:1px solid rgb(223, 215, 219); height:220px;width:520px;margin-left:auto;margin-right:auto;background-color:white;margin-top:10px;">
+        <div style="border:1px solid rgb(223, 215, 219); height:220px;width:650px;margin-left:auto;margin-right:auto;background-color:white;margin-top:10px;">
         <h1 style=" text-align: center;">Hello ${user.email},</h1>
         <h2 style=" text-align: center;">You have requested a password reset</h2>
         <p style=" text-align: center;">Please click on the link to reset your password</p>
@@ -126,3 +128,36 @@ exports.resetpassword = async (req,res,next) => {
         res.status(400).json(error)
     }
 } 
+
+exports.googlelogin = async (req,res,next) => {
+    const {tokenId} = req.body;
+    client.verifyIdToken({idToken : tokenId ,audience : "1093241151358-1pgh4gf6et6t5f3gfg6vlt0cv7onf8jr.apps.googleusercontent.com"})
+    .then(response=>{
+        const{email_verified,name,email} = response.payload;
+        if(email_verified){
+            User.findOne({email}).exec((err,user)=>{
+                if(err){
+                    res.status(400).json("Something went wrong")
+                }
+                else {
+                    if(user){
+                        const token = jwt.sign({id:user._id},process.env.TOKEN_SECRET,{expiresIn : "20h"});
+                        res.status(200).json({user,token}) ;
+                    }else{
+                        const password = email+process.env.TOKEN_SECRET;
+                        const newUser = new User({username:name,email,password});
+                        newUser.save((err,data) => {
+                            if(err){
+                                res.status(400).json("Something went wrong")
+                            }
+                            const token = jwt.sign({id:data._id},process.env.TOKEN_SECRET,{expiresIn : "20h"});
+                            res.status(200).json({newUser,token}) ;
+
+                        })
+                    }
+                }
+            })
+        }
+    })
+
+}

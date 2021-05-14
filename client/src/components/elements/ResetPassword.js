@@ -1,5 +1,4 @@
-import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {useState} from 'react'
 import axios from 'axios'
 
 export default function ResetPassword({match,history}) {
@@ -55,7 +54,7 @@ export default function ResetPassword({match,history}) {
     
     }
     return (
-        <div className="container1" >
+        <div className="container1" style={{width:"350px",border:'1px solid grey',padding:'10px',height:'355px',marginTop:'100px'}} >
         <h2>Reset Password</h2> <br />
         {error && <div  className="error ">{error}  </div> }
         {success && <div  className="success ">{success}  </div> }

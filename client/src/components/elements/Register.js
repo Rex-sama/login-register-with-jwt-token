@@ -70,7 +70,7 @@ export default function Register({history}) {
                 <input type="password" placeholder="Enter Password" value={password} onChange={e=>setPassword(e.target.value)} /> <br/><br/>
                 <label  className="l3">Confirm Password</label><br />
                 <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)} /><br/><br/>
-                <input type="submit" value='Submit' className="btn btn-primary"/><br/>
+                <input type="submit" value='Submit' className="btn btn-primary"/><br/><p></p>
             <span>Already have an account?<Link to='/login' className='f1'> Log in</Link> </span>
             </form>
             </div>

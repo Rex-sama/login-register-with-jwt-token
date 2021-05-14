@@ -26,7 +26,10 @@ export default function ForgotPassword() {
             try {
                 const {data} = await axios.post("/api/forgotpassword",{email},config)
                 setSuccess(data.data)
-                console.log(data.data);
+                setEmail('')
+                setTimeout(()=>{
+                    setSuccess('')
+                },6000)
               
             } catch (error) {
                 setError(error.response.data)
