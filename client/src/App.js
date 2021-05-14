@@ -1,14 +1,14 @@
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 
 //Routing
-import PrivateRoute from './components/routes/PrivateRoute'
+import PrivateRoute from './components/Authentication/PrivateRoute/PrivateRoute'
 
 //Components
-import Private from './components/elements/Private'
-import Register from './components/elements/Register'
-import Login from './components/elements/Login'
-import ForgotPassword from './components/elements/ForgotPassword'
-import ResetPassword from './components/elements/ResetPassword'
+import Home from './components/routes/Home'
+import Register from './components/Authentication/Register'
+import Login from './components/Authentication/Login'
+import ForgotPassword from './components/Authentication/ForgotPassword'
+import ResetPassword from './components/Authentication/ResetPassword'
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Switch>
-        <PrivateRoute exact path="/" component={Private}/>
+        <PrivateRoute exact path="/" component={Home}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={Register}/>
         <Route exact path='/forgotpassword' component={ForgotPassword}/>

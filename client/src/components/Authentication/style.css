@@ -82,6 +82,18 @@ body{
 .googlebutton img {
     margin-right: 7px;
 }
+.password{
+    width: 200px;
+}
+.eye{
+    text-align: center;
+    margin-right: 50px;
+    border: 0.1px solid rgb(66, 65, 65);
+    padding-top: 10px;
+    padding-bottom: 9px;
+    padding-right: 4px;
+    border-left: none;
+}
 
 
 /* Register */

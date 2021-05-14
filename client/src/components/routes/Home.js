@@ -1,8 +1,8 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
-import './style.css'
+import '../Authentication/style.css'
 
-export default function Private({history}) {
+export default function Home({history}) {
     const [error,setError] = useState('')
     const [privateData,setPrivateaData] = useState('')
     

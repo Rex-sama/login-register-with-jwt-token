@@ -14,11 +14,11 @@ app.use('/api',require('./routes/post'))
 
 
 const port = process.env.PORT && 3001
-const server = app.listen(port,()=>{
+ app.listen(port,()=>{
     console.log(`Server Running on port ${port}`);
 })
 
-process.on("UnhandledRejection",(error,promise) => {
-    console.log(`Error : ${error}`);
-    server.close(()=>process.exit(1))
-})
+// process.on("UnhandledRejection",(error,promise) => {
+//     console.log(`Error : ${error}`);
+//     server.close(()=>process.exit(1))
+// })

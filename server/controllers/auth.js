@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
 const {OAuth2Client} = require('google-auth-library')
-const client = new OAuth2Client("1093241151358-1pgh4gf6et6t5f3gfg6vlt0cv7onf8jr.apps.googleusercontent.com")
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
 exports.register = async(req,res,next) => {
     const {username,email,password}= req.body
@@ -94,7 +94,7 @@ exports.forgotpassword = async(req,res,next) => {
             user.resetExpire =undefined
 
             await user.save()
-            res.status(500).json(error)
+            res.status(500).json("Server Error!")
         }
        
 
@@ -131,7 +131,7 @@ exports.resetpassword = async (req,res,next) => {
 
 exports.googlelogin = async (req,res,next) => {
     const {tokenId} = req.body;
-    client.verifyIdToken({idToken : tokenId ,audience : "1093241151358-1pgh4gf6et6t5f3gfg6vlt0cv7onf8jr.apps.googleusercontent.com"})
+    client.verifyIdToken({idToken : tokenId ,audience : process.env.GOOGLE_CLIENT_ID})
     .then(response=>{
         const{email_verified,name,email} = response.payload;
         if(email_verified){
