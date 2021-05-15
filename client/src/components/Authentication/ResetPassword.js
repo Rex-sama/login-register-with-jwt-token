@@ -6,6 +6,7 @@ export default function ResetPassword({match,history}) {
     const [confirmPassword,setConfirmPassword] = useState('')
     const [error,setError] = useState('')
     const [success,setSuccess] = useState('')
+    const [loader, setLoader] = useState(false)
 
     const submit = async e => {
         e.preventDefault();
@@ -37,6 +38,7 @@ export default function ResetPassword({match,history}) {
         }else{
             try {
                 const {data} = await axios.put(`/api/resetpassword/${match.params.resetToken}`,{password},config)
+                setLoader(true);
                 setSuccess(data)
                 setTimeout(()=>{
                     history.push('/login')
@@ -67,6 +69,9 @@ export default function ResetPassword({match,history}) {
             <input type="submit" value='Submit' className="btn btn-primary"/><br/>
         </form>
         </div>
+        {loader && 
+             <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+             }
     </div>
     )
 }
