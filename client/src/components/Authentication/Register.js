@@ -8,6 +8,7 @@ export default function Register({history}) {
     const [password,setPassword] = useState('')
     const [confirmPassword,setConfirmPassword] = useState('')
     const [error,setError] = useState('')
+    const [loader, setLoader] = useState(false)
 
     useEffect(()=>{
         if(localStorage.getItem("authToken")){
@@ -45,10 +46,12 @@ export default function Register({history}) {
         }
 
         try {
+            setLoader(true);
             const {data} = await axios.post("/api/register",{username,email,password},config)
             localStorage.setItem("authToken",data.token)
             history.push('/')
         } catch (error) {
+            setLoader(false);
             setError(error.response.data)
             setTimeout(()=>{
                 setError('')
@@ -74,6 +77,9 @@ export default function Register({history}) {
             <span>Already have an account?<Link to='/login' className='f1'> Log in</Link> </span>
             </form>
             </div>
+            {loader && 
+             <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+             }
         </div>
     )
 }

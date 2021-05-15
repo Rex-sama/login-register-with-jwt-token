@@ -12,6 +12,7 @@ export default function Login({history}) {
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
     const [passwordShown, setPasswordShown] = useState(false);
+    const [loader, setLoader] = useState(false)
 
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
@@ -34,14 +35,15 @@ export default function Login({history}) {
                 "Content-Type" : "application/json"
             }
         }
-
+       
         try {
+            setLoader(true);
             const data = await axios.post("/api/login",{email,password},config)
             localStorage.setItem("authToken",data.data)
             history.push('/')
         } catch (error) {
+            setLoader(false);
             setError(error.response.data)
-           
             setTimeout(()=>{
                 setError('')
             },3000)
@@ -53,10 +55,12 @@ export default function Login({history}) {
 
     const responseSuccessGoogle = async (res) => {
          try { 
+            setLoader(true);
             const result = await axios.post('/api/googlelogin',{tokenId : res.tokenId})
             localStorage.setItem("authToken",result.data.token)
             history.push('/')
         } catch (error) {
+            setLoader(false);
             setError("Something went wrong! Try again")
             setTimeout(()=>{
                 setError('')
@@ -104,6 +108,13 @@ export default function Login({history}) {
                 cookiePolicy={'single_host_origin'}
             />
             </form>
+            {/*------------------ Loader------------------- */}
+         
+        {loader && 
+        <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        }
+          
+
             </div>
         </div>
     )
